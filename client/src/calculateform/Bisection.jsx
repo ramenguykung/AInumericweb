@@ -67,7 +67,7 @@ export default function Bisection() {
     }
 
     console.log("Sending data:", { function_text: fx, lower_bound: xL, upper_bound: xR, result: finalResult }); // Log ข้อมูลที่ส่ง
-    fetch('http://localhost:8080/bisection', {
+    fetch(`${import.meta.env.VITE_API_URL}/bisection`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -8,7 +8,7 @@ services:
     depends_on:
       - server
     environment:
-      - VITE_API_URL=http://localhost:8080
+      - VITE_API_URL=http://server:3000
     networks:
       - my_network
 
@@ -25,9 +25,24 @@ services:
       - NODE_ENV=development
       - DB_HOST=db
       - DB_USER=root
-      - DB_PASSWORD=root  # Make sure this matches MYSQL_ROOT_PASSWORD
+      - DB_PASSWORD=root  
       - DB_NAME=numericalmethod
       - DB_PORT=3306
+    networks:
+      - my_network
+    
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - 8090:8090
+    depends_on:
+      - db
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+      - MYSQL_ROOT_PASSWORD=root
+      - APACHE_PORT=8090
     networks:
       - my_network
 
